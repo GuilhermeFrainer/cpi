@@ -20,6 +20,7 @@ def main():
 
     workbook, worksheet = make_excel('CPI', series_list, headers)
     make_chart(workbook)
+    credits(workbook)
     workbook.close()
 
 
@@ -30,7 +31,7 @@ def get_data():
     start_year = int(START_YEAR)
     end_year = start_year + 19
 
-    while end_year < datetime.date.today().year + 1:
+    while start_year > datetime.date.today().year:
 
         new_full_cpi, new_core_cpi = get_json(start_year, end_year)
         full_cpi = new_full_cpi + full_cpi
@@ -136,6 +137,7 @@ def credits(workbook : xlsxwriter.Workbook):
     worksheet.write('A1', 'Arquivo criado em Python usando a API do Bureau of Labor Statistics.')
     worksheet.write('A2', 'Link do código')
     worksheet.write('A3', 'BLS.gov cannot vouch for the data or analyses derived from these data after the data have been retrieved from BLS.gov.')
+
 
 if __name__ == '__main__':
     main()
