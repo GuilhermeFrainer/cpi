@@ -13,6 +13,7 @@ total_entries = 0
 
 
 def main():
+    
     full_cpi, core_cpi = get_data()
     
     series_list = bls_to_list(full_cpi, core_cpi)
@@ -31,7 +32,7 @@ def get_data():
     start_year = int(START_YEAR)
     end_year = start_year + 19
 
-    while start_year > datetime.date.today().year:
+    while start_year <= datetime.date.today().year:
 
         new_full_cpi, new_core_cpi = get_json(start_year, end_year)
         full_cpi = new_full_cpi + full_cpi
@@ -135,7 +136,7 @@ def credits(workbook : xlsxwriter.Workbook):
     
     worksheet = workbook.add_worksheet('Informações')
     worksheet.write('A1', 'Arquivo criado em Python usando a API do Bureau of Labor Statistics.')
-    worksheet.write('A2', 'Link do código')
+    worksheet.write('A2', 'Link do código: https://github.com/GuilhermeFrainer/cpi')
     worksheet.write('A3', 'BLS.gov cannot vouch for the data or analyses derived from these data after the data have been retrieved from BLS.gov.')
 
 
